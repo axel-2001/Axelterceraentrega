@@ -1,0 +1,34 @@
+{% extends "./base.html" %}
+{% block title %}Cursos{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h2 class="colorh2" >Gestion de Curso</h2>
+        <a class="btn btn-success" href="/cursos/">Agregar</a>
+
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Camada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cursos %}
+                        <tr>
+                            <td>{{item.CodigoC}}</td>
+                            <td>{{item.Nombre}}</td>
+                            <td>{{item.Camada}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+    </div>
+{% endblock %}

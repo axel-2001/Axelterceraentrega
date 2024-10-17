@@ -1,0 +1,36 @@
+{% extends "./base.html" %}
+{% block title %}Estudiantes{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h2 class="colorh2" >Gestion de Estudiantes</h2>
+        <a class="btn btn-success" href="/estudianteRegistrar/">Agregar</a>
+
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in estudiantes %}
+                        <tr>
+                            <td>{{item.CodigoE}}</td>
+                            <td>{{item.Nombre}}</td>
+                            <td>{{item.Apellido}}</td>
+                            <td>{{item.Email}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+    </div>
+{% endblock %}
