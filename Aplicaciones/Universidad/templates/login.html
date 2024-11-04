@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+{% block title %}Login{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h2 class="colorh2" >Login de Usuario</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/loginUsuariario/" method="POST">{% csrf_token %}
+                    
+                    <div class="form-group mb-3">
+                        <input type="Email" name="txtEmail" id="txtEmail" class="form-control"  placeholder="Correo" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="password" name="txtPassword" id="txtPassword" class="form-control"  placeholder="Password" required>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <button type="submit" class="form-control btn btn-success btn-block text-white">Login</button>
+                    </div>
+                </form>
+                <a class="btn btn-danger" href="/">Cancelar</a>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

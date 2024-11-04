@@ -1,0 +1,43 @@
+{% extends "./base.html" %}
+{% block title %}Usuarios{% endblock %}
+{% load static %} 
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2 class="colorh2" >Gestion de Usuarios</h2>
+        <a class="btn btn-success" href="/userRegistro/">Agregar</a>
+
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Perfil</th>
+                        <th colspan="2"  class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in usuarios %}
+                        <tr>
+                            <td style="vertical-align:middle;">{{item.CodigoU}}</td>
+                            <td><img style="width: 100px; height: 100px;" src="{% static 'imagenes' %}/{{item.FotoU}}" alt="Foto" /></td>
+                            <td style="vertical-align:middle;">{{item.Nombre}}</td>
+                            <td style="vertical-align:middle;">{{item.Apellido}}</td>
+                            <td style="vertical-align:middle;">{{item.Email}}</td>
+                            <td style="vertical-align:middle;">{{item.Perfil}}</td>
+                            <td style="vertical-align:middle;"><a href="/editarUsuarios/{{item.CodigoU}}" class="btn btn-info">Editar</a></td>
+                            <td style="vertical-align:middle;"><a href="/eliminarUsuarios/{{item.CodigoU}}" class="btn btn-danger">Eliminar</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+    </div>
+{% endblock %}

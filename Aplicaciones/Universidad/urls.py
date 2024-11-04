@@ -3,16 +3,17 @@ from . import views
 
 urlpatterns = [
     path('',views.home),
-    path('cursos/', views.cursos),
-    path('registrarCurso/',views.registrarCursos),
-    path('principalCursos/', views.principalCurso),
-    path('principalProfesores/', views.principalProfesor),
-    path('registrarProfesor/',views.profesores),
-    path('registrarProfesores/',views.registrarProfesor),
-    path('principalEstudiantes/',views.principalEstudiante),
-    path('estudianteRegistrar/',views.estudiante),
-    path('registrarEstudiantes/',views.registrarEstudiante),
-    path('principalEntregable/',views.principalEntregable),
-    path('entregableRegistrar/',views.entrega),
-    path('registrarEntrega/',views.registrarEntrega)
+    path('principalUser/',views.principalUsuarios),
+    path('userRegistro/',views.registroUsuario),
+    path('registrarUsuariarios/',views.guardarUsuario),
+    path('eliminarUsuarios/<codigo>',views.eliminarUsuario),
+    path('editarUsuarios/<codigo>',views.edicionUsuario),
+    path('usuarioEditado/',views.editar),
+    path('principalB/',views.principalBlog),
+    path('blogRegistro/',views.registroBlog),
+    path('guardarBlog/',views.guardarBlog),
+    path('eliminarBlog/<codigo>',views.eliminarBlog),
+    path('verEntrada/<codigo>',views.verEntrada),
+    path('verAbout/',views.verAbout),
+    path('login/',views.login)
 ]

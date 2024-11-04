@@ -1,0 +1,15 @@
+{% extends "./base.html" %}
+{% block title %}Blog{% endblock %}
+{% load static %} 
+{% block body %}
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <a class="btn btn-success" href="/principalB/">Volver</a>
+    <div>
+        <h1 style="color: white;">{{blog.Titulo}}</h1>
+        <h3 style="color: white;">{{blog.Subtitulo}}</h3> 
+        <img class="img-thumbnail" src="{% static 'imagenes' %}/{{blog.FotoB}}" alt="Foto" />
+        <br>
+        <h3 style="color: white;">{{blog.Cuerpo}}</h> 
+    </div>        
+</div>
+{% endblock %}

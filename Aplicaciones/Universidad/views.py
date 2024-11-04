@@ -1,70 +1,93 @@
 from django.shortcuts import render, redirect
-from .models import Cursos, Profesores, Estudiantes, Entregables
+from .models import Usuarios,Blog
+import os
+
 # Create your views here.
 def home(request):
     return render(request,"inicio.html")
 
-def cursos(request):
-    return render(request, 'cursoRegistrar.html')
+def principalUsuarios(request):
+    usuario = Usuarios.objects.all()
+    return render(request,"principalUsuario.html",{"usuarios":usuario})
 
-def registrarCursos(request):
+def registroUsuario(request):
+    return render(request,"usuarioRegistrar.html")
+
+def guardarUsuario(request):
     nombre = request.POST['txtNombre']
-    camada =  request.POST['numCamada']
+    apellido = request.POST['txtApellido']
+    email = request.POST['txtEmail']
+    password = request.POST['txtPassword']    
+    archivo = request.FILES.get('txtFoto')
+    foto = archivo.name
+
+    usuario = Usuarios.objects.create(Nombre=nombre,Apellido=apellido,Email=email,Password=password,ArchivoU=archivo,FotoU=foto,Perfil=0)
     
-    curso = Cursos.objects.create(Nombre=nombre, Camada=camada)
-    return redirect('/principalCursos/')
+    return redirect('/principalUser/')
 
-def principalCurso (request):
-    cursos = Cursos.objects.all()
-    return render(request, 'principalCurso.html', {"cursos": cursos})
-
-def principalProfesor(request):
-    profesores = Profesores.objects.all()
-    return render(request, 'principalProfesor.html', {"profesores": profesores})
-
-def profesores(request):
-    return render(request, 'profesorRegistrar.html')
-
-def registrarProfesor(request):
-    nombre = request.POST['txtNombre']
-    apellido =  request.POST['txtApellido']
-    correo =  request.POST['txtEmail']
+def eliminarUsuario(request,codigo):
+    usuario = Usuarios.objects.get(CodigoU=codigo)
+    usuario.delete()
     
-    profesor = Profesores.objects.create(Nombre=nombre, Apellido=apellido, Email=correo )
-    return redirect('/principalProfesores/')
+    return redirect('/principalUser/')
 
-def principalEstudiante(request):
-    estudiantes = Estudiantes.objects.all()
-    return render(request, 'principalEstudiante.html', {"estudiantes": estudiantes})
+def edicionUsuario(request,codigo):
+    usuario = Usuarios.objects.get(CodigoU=codigo)
+    return render(request,"usuarioEditar.html",{'usuario':usuario})
 
-def estudiante(request):
-    return render(request, 'estudianteRegistrar.html')
+def editar(request):
+     
+    codigo   = request.POST['txtCodigo']
+    nombre   = request.POST['txtNombre']
+    apellido = request.POST['txtApellido']
+    email    = request.POST['txtEmail']
+    password = request.POST['txtPassword']
+    archivo = request.FILES.get('txtFoto')
+    foto = archivo.name
     
-def registrarEstudiante(request):
-    nombre = request.POST['txtNombre']
-    apellido =  request.POST['txtApellido']
-    correo =  request.POST['txtEmail']
+    usuario = Usuarios.objects.get(CodigoU=codigo)
+    usuario.Nombre = nombre
+    usuario.Apellido = apellido
+    usuario.Email = email
+    usuario.Password = password
+    usuario.ArchivoU = archivo
+    usuario.FotoU = foto
     
-    estudiante = Estudiantes.objects.create(Nombre=nombre, Apellido=apellido, Email=correo )
-    return redirect('/principalEstudiantes/')
+    usuario.save()
+    return redirect('/principalUser/')
 
-def principalEntregable(request):
-    entregables =  Entregables.objects.all()
-    return render(request, 'principalEntregables.html', {"entregables": entregables})
+def principalBlog(request):
+    entradas = Blog.objects.all()
+    return render(request,"principalBlog.html",{"entradas":entradas})
 
-def entrega(request):
-    return render(request, 'entregableRegistrar.html')
+def registroBlog(request):
+    return render(request,"BlogRegistrar.html")
+
+def guardarBlog(request):
+    titulo    = request.POST['txtTitulo']
+    subtitulo = request.POST['txtSubtitulo']
+    cuerpo    = request.POST['txtCuerpo']
+    autor     = Usuarios.objects.get(CodigoU=request.POST['txtAutor'])
+    fecha     = request.POST['txtFecha']
+    archivo = request.FILES.get('txtFoto')
+    foto = archivo.name
     
-def registrarEntrega(request):
-    nombre = request.POST['txtNombre']
-    fechaEntrega =  request.POST['txtentrega']
-    entrega =  request.POST['numentrega']
+    blog = Blog.objects.create(Titulo=titulo,Subtitulo=subtitulo,Cuerpo=cuerpo,Autor=autor,ArchivoB=archivo,FotoB=foto,Fecha=fecha)
     
-    entregable = Entregables.objects.create(Nombre=nombre, FechaDeEntrega=fechaEntrega, Entregado=entrega )
-    return redirect('/principalEntregable/')
+    return redirect('/principalB/')
 
-      
+def eliminarBlog(request,codigo):
+    blog = Blog.objects.get(CodigoB=codigo)
+    blog.delete()
     
+    return redirect('/principalB/')
 
+def verEntrada(request,codigo):
+    blog = Blog.objects.get(CodigoB=codigo)
+    return render(request,"blogVer.html",{'blog':blog})
 
-    
+def verAbout(request):
+    return render(request,"about.html")
+
+def login(request):
+    return render(request,"login.html")

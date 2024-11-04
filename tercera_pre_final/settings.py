@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'tercera_pre_final.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'Universidad.db'
+        'NAME': 'Blog.db'
     }
 }
 

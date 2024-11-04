@@ -1,0 +1,37 @@
+{% extends "./base.html" %}
+{% block title %}Blog{% endblock %}
+{% load static %} 
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2 class="colorh2" >Gestion de Blog</h2>
+        <a class="btn btn-success" href="/blogRegistro/">Agregar</a>
+
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Entradas</th>
+                        <th colspan="1"  class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in entradas %}
+                        <tr>
+                            <td>
+                                <img class="img-thumbnail" src="{% static 'imagenes' %}/{{item.FotoB}}" alt="Foto" />
+                                <p>{{item.Titulo}}. {{item.Subtitulo}}
+                                <a href="/verEntrada/{{item.CodigoB}}" class="btn btn-info">Leer Mas</a>
+                            </p>
+                            </td>
+                            <td><a href="/eliminarBlog/{{item.CodigoB}}" class="btn btn-danger">Eliminar</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+    </div>
+{% endblock %}
